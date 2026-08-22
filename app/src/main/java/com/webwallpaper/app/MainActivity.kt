@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.webwallpaper.app.ui.theme.AppTheme
@@ -25,9 +26,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             val themeState = rememberThemeState()
             WebWallpaperTheme(themeState = themeState) {
-                Surface(color = AppTheme.colors.panel) {
+                val bgColor = if (themeState.isDark) Color.Green else Color.Red
+                Surface(color = bgColor) {
                     ThemeTogglePlaceholderScreen(
-                        onToggleTheme = { themeState.toggle() }
+                        onToggleTheme = { themeState.toggle() },
+                        isDark = themeState.isDark
                     )
                 }
             }
@@ -42,19 +45,20 @@ class MainActivity : ComponentActivity() {
  * behavior (no animation). All real screens/controls come in later sessions.
  */
 @Composable
-fun ThemeTogglePlaceholderScreen(onToggleTheme: () -> Unit) {
-    val colors = AppTheme.colors
+fun ThemeTogglePlaceholderScreen(onToggleTheme: () -> Unit, isDark: Boolean) {
+    val bgColor = if (isDark) Color.Green else Color.Red
+    val textColor = if (isDark) Color.Black else Color.White
         Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(colors.panel)
+            .background(bgColor)
             .clickable(onClick = onToggleTheme)
             .padding(24.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = "Web Wallpaper — Auto-Save & Push Verified!",
-            color = colors.text,
+            color = textColor,
             fontWeight = FontWeight.Medium
         )
     }
