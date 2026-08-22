@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ThemeTogglePlaceholderScreen(onToggleTheme: () -> Unit) {
     val colors = AppTheme.colors
-    Box(
+        Box(
         modifier = Modifier
             .fillMaxSize()
             .background(colors.panel)
@@ -53,7 +53,7 @@ fun ThemeTogglePlaceholderScreen(onToggleTheme: () -> Unit) {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Web Wallpaper — tap to toggle theme",
+            text = "Web Wallpaper — Auto-Save & Push Verified!",
             color = colors.text,
             fontWeight = FontWeight.Medium
         )
